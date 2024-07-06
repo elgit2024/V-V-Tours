@@ -1,0 +1,361 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>vv</title>
+
+    <!-- Template CSS -->
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body id="home">
+<section class=" w3l-header-4 header-sticky">
+	<!--header-->
+	<header id="site-header" class="fixed-top">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-dark stroke">
+				<h1><a class="navbar-brand" href="{% url 'userHome' %}">
+					</span>VENTURE VISTAS
+				</a></h1>
+				<button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+					<span class="navbar-toggler-icon fa icon-close fa-times"></span>
+					
+				</button>
+	  
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+					<ul class="navbar-nav ml-lg-5">
+						<li class="nav-item active">
+							<a class="nav-link" href="{% url 'userHome' %}">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item @@services__active">
+							<a class="nav-link" href="{% url 'user_packages' %}">Tours</a>
+						</li>
+						<li class="nav-item @@contact__active">
+							<a class="nav-link" href="{% url 'user_contact' %}">Contact Us</a>
+						</li>
+            <li class="nav-item @@contact__active">
+							<a class="nav-link" href="{% url 'userviewbookings' %}">Bookings</a>
+						</li>
+						
+<!-- dropdown -->
+            <div class="dropdown">
+              <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="" width="30px" src="../../static/images/prof.png" alt="Profile image"> </a>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-header text-center">
+                  <p class="mb-1 mt-3 font-weight-semibold">{{ User.username }}</p>
+                  <p class="font-weight-light text-muted mb-0">{{ User.email }}</p>
+                </div>
+                <a class="dropdown-item" href="{% url 'edit_userprofile' %}">My Profile <span class="badge badge-pill badge-danger"></span><i
+                    class="dropdown-item-icon ti-dashboard"></i></a>
+                
+                <a href="{% url 'Logout' %}" class="dropdown-item">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+              </div>
+            </div>
+<!-- dropdown -->              
+            </div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	  </header>
+	<!--/header-->
+</section>
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+            <div class="card-body">
+                <h4 class="card-title " style="font-size: xx-large;">Edit Profile</h4>
+                <form class="form-sample" action="{% url 'edit_userprofile' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">User Name</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="username" value="{{User.username}}" class="form-control" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="email" value="{{User.email}}" class="form-control" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Contact</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="phone_number" value="{{User.phone_number}}" class="form-control" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary btn-fw">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style>
+        /* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main panel */
+.main-panel {
+    margin: 100px auto;
+    width: 90%;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Content wrapper */
+.content-wrapper {
+    padding: 50px;
+}
+
+/* Row and column */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.col-12,
+.col-md-6 {
+    padding: 0 10px;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.col-md-6 {
+    width: 50%;
+}
+
+/* Grid margin */
+.grid-margin {
+    margin-bottom: 20px;
+}
+
+/* Card styles */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Card title */
+.card-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    padding-top:0; /* Extra padding for header */
+}
+
+/* Form styles */
+.form-sample {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group.row {
+    display: flex;
+    align-items: center;
+}
+
+.col-form-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-outline-primary {
+    background-color: #fff;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-fw {
+    width: 100%;
+}
+    </style>
+<style>  /* Reset and general styles */
+    * {
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Change font family */
+    margin-top: 0px; /* Adjust margin to make space for extended header */
+    }
+    
+    /* Header styles */
+    .w3l-header-4 {
+    width: 100%;
+    position: fixed; /* Keep header fixed at the top */
+    top: 0;
+    z-index: 1000;
+    background: rgb(0, 0, 0);
+    padding: 0px 0; /* Increase padding to extend header */
+    }
+    
+    #site-header {
+    width: 90%; /* Extend header width */
+    margin: 0 auto; /* Center header content */
+    }
+    
+    #site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    }
+    
+    .navbar-brand {
+    font-size: 28px; /* Increase font size for brand */
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    }
+    
+    .navbar-toggler {
+    display: none;
+    border: none;
+    background: transparent;
+    color: white;
+    }
+    
+    .navbar-toggler-icon {
+    font-size: 24px;
+    cursor: pointer;
+    }
+    
+    .navbar-nav {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    }
+    
+    .nav-item {
+    margin-left: 20px;
+    }
+    
+    .nav-link {
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background 0.3s, color 0.3s;
+    }
+    
+    .nav-link:hover,
+    .nav-link:focus {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+    .navbar-toggler {
+      display: block;
+    }
+    
+    .navbar-collapse {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      position: absolute;
+      top: 60px;
+      left: 0;
+    }
+    
+    .navbar-collapse.show {
+      display: flex;
+    }
+    
+    .navbar-nav {
+      flex-direction: column;
+      width: 100%;
+      text-align: center; /* Center links in mobile view */
+    }
+    
+    .nav-item {
+      width: 100%;
+      text-align: center;
+      margin: 0;
+    }
+    
+    .nav-link {
+      width: 100%;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    }
+    </style>
+</div>
+</div>
+</div>
+</div> 
+{% endblock %}
